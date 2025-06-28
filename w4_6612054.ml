@@ -22,8 +22,8 @@ fun fourth (_::_::_::x::_) = x;
 
 
 (* 5 *)
-fun min3 (a,b,c) = if a < b andalso a < c then a else
-                    if b < a andalso b < c then b
+fun min3 (a,b,c) = if a <= b andalso a <= c then a else
+                    if b <= c then b
                     else c;
 
 
@@ -53,7 +53,7 @@ fun rotate (a, 0) = a |
 
 
 (* 9 *)
-fun max nil = 0 |
+fun max [a] = a |
     max (a) = 
             let 
                 val first = hd a;
