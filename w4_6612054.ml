@@ -14,7 +14,7 @@ fun cube x = x * x * x;
 
 
 (* 3 *)
-fun cuber x : real = x * x * x;
+fun cuber (x : real) = x * x * x;
 
 
 (* 4 *)
@@ -53,7 +53,7 @@ fun rotate (a, 0) = a |
 
 
 (* 9 *)
-fun max [a] = a |
+fun max [x] = x |
     max (a) = 
             let 
                 val first = hd a;
