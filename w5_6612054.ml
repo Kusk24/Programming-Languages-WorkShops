@@ -10,9 +10,7 @@ fun exist (e, []) = false
                 val x = hd L;
                 val xs = tl L;
                 in 
-                    case x = e of
-                      true => true |
-                      false => exist (e,xs)
+                   x = e orelse exist (e,xs)
                 end;
 
 (* 2 *)
@@ -20,11 +18,11 @@ fun greaterthan ([], e) = []
 |   greaterthan (L, e) = let 
                         val x = hd L;
                         val xs = tl L;
-                    in 
-                    case x > e of 
-                    true => x :: greaterthan (xs, e) |
-                    false => greaterthan(xs, e)
-                    end;
+                      in 
+                        case x > e of 
+                          true => x :: greaterthan (xs, e) |
+                          false => greaterthan(xs, e)
+                      end;
 
 (* 3 *)
 fun repeats([]) = false
@@ -42,11 +40,11 @@ fun repeats([]) = false
 fun partition (_, []) = ([], [])
 |   partition (pivot, x::xs) = let   
                                 val (smaller, bigger) = partition (pivot, xs)
-                            in 
+                              in 
                                 case x < pivot of
-                                true => (x::smaller, bigger)
-                            |   false => (smaller, x::bigger)
-                            end;
+                                  true => (x::smaller, bigger)
+                              |   false => (smaller, x::bigger)
+                              end;
 fun quicksort ([]) = []
 |   quicksort (pivot::rest) = let 
                                 val (smaller, bigger) = partition(pivot, rest)
@@ -55,11 +53,9 @@ fun quicksort ([]) = []
                             end;
 
 
-
-
 (* 5 *)
 fun ismember (e, []) = false
-| ismember (e, L) = let 
+|   ismember (e, L) = let
                     val x = hd L;
                     val xs = tl L;
                     in 
@@ -81,9 +77,8 @@ fun intersect ([], _) = []
 
 (* 8 *)
 fun powerset [] = [[]]
-  | powerset (x::xs) =
-      let
-        val rest = powerset xs
-      in
-        rest @ map (fn subset => x::subset) rest
-      end;
+  | powerset (x::xs) = let
+                        val rest = powerset(xs)
+                      in
+                        rest @ map (fn subset => x::subset) rest
+                      end;
