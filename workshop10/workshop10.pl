@@ -52,7 +52,7 @@ path(State, Goal, [State | RestPath]) :-
     path(NextState, Goal, RestPath).
 
 
-% Step 6, Task 6
+% Step 6
 % There is an error for indefinite loop and program quits
 /*
 ?- initial(S), goal(G), path(S, G, Path).
