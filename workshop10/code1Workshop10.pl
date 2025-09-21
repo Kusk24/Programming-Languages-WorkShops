@@ -3,7 +3,6 @@ Name - Win Yu Maung,
 ID - 6612064,
 Sec - 542
 */
-:- discontiguous move/2.
 
 % Step 1, Task 1
 %Initial State
@@ -70,36 +69,3 @@ ERROR: Use the --stack_limit=size[KMG] command line option or
 ERROR: ?- set_prolog_flag(stack_limit, 2_147_483_648). to double the limit.
 ^  Exception: (4) setup_call_cleanup('$toplevel':notrace(call_repl_loop_hook(begin, 0)), '$toplevel':'$query_loop'(0), '$toplevel':notrace(call_repl_loop_hook(end, 0)))
 */
-
-
-% Step 7
-% Task 6
-new_initial(state(4,4,0,0,left)).
-new_goal(state(0,0,4,4,right)).
-
-/* original paths
-move(1,0).
-move(2,0).
-move(0,1).
-move(0,2).
-move(1,1).
-*/
-move(3,0).   
-move(0,3).   
-move(2,1).   
-move(1,2). 
-
-% Task 7
-/*
-    The reason is when we backtrack and moves it goes to another state and then backtrack again it will go back to original state
-    then the loops goes on and resulting in indefinite loops
-*/
-% we can avoid that by modifying path with adding visited as new argument
-fixed_path(State, State, _, [State]).
-fixed_path(State, Goal, Visited, [State | RestPath]) :-
-    transition(State, NextState),
-    \+ member(NextState, Visited),             
-    fixed_path(NextState, Goal, [NextState|Visited], RestPath).
-
-fixed_path(State, Goal, Path) :-
-    fixed_path(State, Goal, [State], Path).
